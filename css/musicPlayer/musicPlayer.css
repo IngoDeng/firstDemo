@@ -126,10 +126,14 @@ a {
 	text-overflow: ellipsis;
 }
 
+.ctrPlay .ctrl .tag{
+	color:#fff;
+}
+
 .ctrPlay .ctrl .tag span {
 	font-size: 12px;
 	margin-top: 5px;
-	color: #fff;
+	color: #ccc;
 }
 
 .ctrPlay .ctrl .icon {
