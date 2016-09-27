@@ -1,9 +1,8 @@
-﻿(function($){
+﻿$(function (){
 	// Settings
 	var repeat = localStorage.repeat || 2,
-		shuffle = localStorage.shuffle || 'false',
 		continous = true,
-		autoplay = true,
+		autoplay = false,
 		playlist = [
 		{
 			title: '钢琴曲 - 海阔天空',
@@ -34,14 +33,18 @@
 	// Load playlist
 	for (var i=0; i<playlist.length; i++){
 		var item = playlist[i];
-		$('#playlist').append('<li>'+item.artist+' - '+item.title+'</li>');
+		$('#playlist').append('<li>'+item.artist+' '+item.title+'</li>');
 	}
 
 	var time = new Date(),
-		currentTrack = shuffle === 'true' ? time.getTime() % playlist.length : 0,
+		currentTrack,
 		trigger = false,
 		audio, timeout, isPlaying, playCounts;
-
+	if(repeat == 3){
+		currentTrack = time.getTime() % playlist.length 
+	}else{
+		currentTrack = 0;
+	}	
 	var play = function(){
 		audio.play();
 		$('.playback').addClass('playing');
@@ -62,8 +65,8 @@
 			ratio = value / audio.duration * 100;
 
 		$('.timer').html(parseInt(value/60)+':'+currentSec);
-		$('.progress .pace').css('width', ratio + '%');
-		$('.progress .slider a').css('left', ratio + '%');
+		$('.progress_1 .pace').css('width', ratio + '%');
+		$('.progress_1 .slider a').css('left', ratio + '%');
 	}
 
 	var updateProgress = function(){
@@ -71,7 +74,7 @@
 	}
 
 	// Progress slider
-	$('.progress .slider').slider({step: 0.1, slide: function(event, ui){
+	$('.progress_1 .slider').slider({step: 0.1, slide: function(event, ui){
 		$(this).addClass('enable');
 		setProgress(audio.duration * ui.value / 100);
 		clearInterval(timeout);
@@ -120,10 +123,11 @@
 
 		$('audio').remove();
 		loadMusic(track);
-		if (isPlaying == true) play();
+		/*if (isPlaying == true) */
+		play();
 	}
 
-	// Shuffle
+	// Shuffle随机播放
 	var shufflePlay = function(){
 		var time = new Date(),
 			lastTrack = currentTrack;
@@ -140,22 +144,20 @@
 		if (continous == true) isPlaying = true;
 		if (repeat == 1){
 			play();
+		} else if(repeat == 3){
+			shufflePlay();
 		} else {
-			if (shuffle === 'true'){
-				shufflePlay();
+			if (repeat == 2){
+				switchTrack(++currentTrack);
 			} else {
-				if (repeat == 2){
-					switchTrack(++currentTrack);
-				} else {
-					if (currentTrack < playlist.length) switchTrack(++currentTrack);
-				}
+				if (currentTrack < playlist.length) switchTrack(++currentTrack);
 			}
 		}
 	}
 
 	var beforeLoad = function(){
 		var endVal = this.seekable && this.seekable.length ? this.seekable.end(0) : 0;
-		$('.progress .loaded').css('width', (100 / (this.duration || 1) * endVal) +'%');
+		$('.progress_1 .loaded').css('width', (100 / (this.duration || 1) * endVal) +'%');
 	}
 
 	// Fire when track loaded completely
@@ -168,12 +170,13 @@
 		var item = playlist[i],
 			newaudio = $('<audio>').html('<source  src="'+item.mp3+'"><source src="'+item.ogg+'">').appendTo('#player');
 		
-		$('.cover').html('<img src="'+item.cover+'" alt="'+item.album+'">');
+		//$('.cover').html('<img src="'+item.cover+'" alt="'+item.album+'">');
 		$('.tag').html('<strong>'+item.title+'</strong><span class="artist">'+item.artist+'</span><span class="album"></span>');
 		$('#playlist li').removeClass('playing').eq(i).addClass('playing');
+		//$('#playlist').css("background", "url("+item.cover+") rgba(0, 0, 0, 0.3)");
 		audio = newaudio[0];
 		audio.volume = $('.mute').hasClass('enable') ? 0 : volume;
-		audio.addEventListener('progress', beforeLoad, false);
+		audio.addEventListener('progress_1', beforeLoad, false);
 		audio.addEventListener('durationchange', beforeLoad, false);
 		audio.addEventListener('canplay', afterLoad, false);
 		audio.addEventListener('ended', ended, false);
@@ -188,14 +191,14 @@
 		}
 	});
 	$('.rewind').on('click', function(){
-		if (shuffle === 'true'){
+		if (repeat == 3){
 			shufflePlay();
 		} else {
 			switchTrack(--currentTrack);
 		}
 	});
 	$('.fastforward').on('click', function(){
-		if (shuffle === 'true'){
+		if (repeat == 3){
 			shufflePlay();
 		} else {
 			switchTrack(++currentTrack);
@@ -208,11 +211,16 @@
 		});
 	});
 
-	if (shuffle === 'true') $('.shuffle').addClass('enable');
+	$('.musiclist').on('click', function(){
+		$(".playListBox").toggle()
+	});
+	
 	if (repeat == 1){
 		$('.repeat').addClass('once');
 	} else if (repeat == 2){
 		$('.repeat').addClass('all');
+	} else if (repeat == 3){
+		$('.repeat').addClass('enable');
 	}
 
 	$('.repeat').on('click', function(){
@@ -220,28 +228,11 @@
 			repeat = localStorage.repeat = 2;
 			$(this).removeClass('once').addClass('all');
 		} else if ($(this).hasClass('all')){
-			repeat = localStorage.repeat = 0;
-			$(this).removeClass('all');
-		} else {
+			repeat = localStorage.repeat = 3;
+			$(this).removeClass('all').addClass('enable');
+		} else if($(this).hasClass('enable')){
 			repeat = localStorage.repeat = 1;
-			$(this).addClass('once');
-		}
-		if(repeat == 1){
-			shuffle = localStorage.shuffle = 'false';
-			$('.shuffle').removeClass('enable');
+			$(this).removeClass('enable').addClass('once');
 		}
 	});
-
-	$('.shuffle').on('click', function(){
-		if(repeat == 1){
-			return;
-		}
-		if ($(this).hasClass('enable')){
-			shuffle = localStorage.shuffle = 'false';
-			$(this).removeClass('enable');
-		} else {
-			shuffle = localStorage.shuffle = 'true';
-			$(this).addClass('enable');
-		}
-	});
-})(jQuery);
+})

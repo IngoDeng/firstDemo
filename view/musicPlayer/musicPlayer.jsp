@@ -9,61 +9,63 @@
 <script type="text/javascript" src="${ctx}/js/jquery-qrcode/qrcode.js"> </script>
 <link rel="stylesheet" href="${ctx}/css/musicPlayer/musicPlayer.css">
 <script type="text/javascript">
-	$(function (){
+	/* $(function (){
 		$('#2Dcode').qrcode("http://192.168.1.112:8082/demo/");
-	});
+	}); */
 	
 </script>
-
 </head>
 <body>
 	<div id="div1">
 		<img src="${ctx}/media/musicPlayer/images/background_2.jpg" />
 	</div>
-	<div class="bo">
-		<div class="bo1">
-			<div id="player">
-				<div class="cover"></div>
-				<div class="ctrl">
-					<div class="tag">
-						<strong>Title</strong> <span class="artist">Artist</span> <span
-							class="album">Album</span>
-					</div>
-					<div class="control">
-						<div class="left">
-							<div class="rewind icon"></div>
-							<div class="playback icon"></div>
-							<div class="fastforward icon"></div>
+	<fieldset>
+		<div class="bo">
+			<div class="playListBox" style="display: none;">
+				<div>
+					<ul id="playlist"></ul>
+				</div>
+			</div>
+			<div class="ctrlbox">
+				<div class="ctrPlay" id="player">
+					<div class="ctrl">
+						<div class="tag left">
+							<strong>Title</strong> <span class="artist">Artist</span> <span
+								class="album">Album</span>
 						</div>
-						<div class="volume right">
-							<div class="mute icon left"></div>
-							<div class="slider left">
-								<div class="pace"></div>
+						<div class="control">
+							<div class="repeatShuffleBox left">
+								<div class="musiclist icon" title="音乐列表"></div>
+								<div class="repeat icon" title="播放模式"></div>
+							</div>
+							<div class="left RewindBackFrowardBox">
+								<div class="rewind icon" title="上一首"></div>
+								<div class="playback icon"></div>
+								<div class="fastforward icon" title="下一首"></div>
+							</div>
+							<div class="left volume volumeBox">
+								<div class="mute icon left"></div>
+								<div class="slider left">
+									<div class="pace"></div>
+								</div>
 							</div>
 						</div>
-					</div>
-					<div class="progress">
-						<div class="slider">
-							<div class="loaded"></div>
-							<div class="pace"></div>
-						</div>
-						<div class="timer left">0:00</div>
-						<div class="right">
-							<div class="repeat icon"></div>
-							<div class="shuffle icon"></div>
+						<div class="progress_1">
+							<div class="slider">
+								<div class="loaded"></div>
+								<div class="pace"></div>
+							</div>
+							<div class="timer left">0:00</div>
 						</div>
 					</div>
 				</div>
 			</div>
-			<ul id="playlist"></ul>
+			<!-- <div style="width:100%;padding-top: 10px;">
+				<div style="width:300px;margin: 0 auto; padding: 0;text-align: center;">
+					<span id="2Dcode"></span>
+				</div>
+			</div> -->
 		</div>
-		<div style="width:100%;padding-top: 10px;">
-			<div style="width:300px;margin: 0 auto; padding: 0;text-align: center;">
-				<span id="2Dcode"></span>
-			</div>
-		</div>
-	</div>
-	<script src="${ctx}/js/jquery-ui-1.8.17/jquery-ui.min.js"></script>
-	<script src="${ctx}/js/musicPlayer/musicPlayer.js"></script>
+	</fieldset>
 </body>
 </html>
