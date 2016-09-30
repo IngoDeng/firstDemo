@@ -46,10 +46,10 @@
 		currentTrack = 0;
 	}	
 	var play = function(){
-		audio.play();
 		$('.playback').addClass('playing');
 		timeout = setInterval(updateProgress, 500);
 		isPlaying = true;
+		setTimeout(function(){audio.play()},500);
 	}
 
 	var pause = function(){
