@@ -133,7 +133,7 @@ a {
 .ctrPlay .ctrl .tag span {
 	font-size: 12px;
 	margin-top: 5px;
-	color: #ccc;
+	color: #fff;
 }
 
 .ctrPlay .ctrl .icon {
@@ -407,17 +407,19 @@ footer a:hover {
 	text-decoration: none;
 }
 
-#div1 {
+.main_div {
 	position: fixed;
 	top: 0;
 	left: 0;
 	bottom: 0;
 	right: 0;
 	z-index: -1;
-}
-
-#div1 img {
+	background: url(../../media/musicPlayer/images/main_bg_1.jpg) no-repeat 0 center;
 	height: 100%;
 	width: 100%;
 	border: 0;
+	filter:"progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod='scale')";  
+	-moz-background-size:100% 100%;  
+    background-size:100% 100%;  
 }
+

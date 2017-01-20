@@ -1,13 +1,19 @@
-<!doctype html>
+<!DOCTYPE html>
 <%@page language="java" pageEncoding="UTF-8"%>
 <html xmlns="http://www.king-test.com">
 <%@include file="/default/include/form.jsp"%>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport"
+	content="width=device-width,initial-scale=1,user-scalable=0">
 <title>音乐播放器</title>
-<script type="text/javascript" src="${ctx}/js/jquery-qrcode/jquery.qrcode.js"> </script>
+<script type="text/javascript"
+	src="${ctx}/js/jquery-qrcode/jquery.qrcode.js"> </script>
 <script type="text/javascript" src="${ctx}/js/jquery-qrcode/qrcode.js"> </script>
+<link rel="stylesheet" href="${ctx}/css/bootstrap/bootstrap.min.css">
 <link rel="stylesheet" href="${ctx}/css/musicPlayer/musicPlayer.css">
+<script src="${ctx}/js/jquery-ui-1.8.17/jquery-ui.min.js"></script>
+<script src="${ctx}/js/musicPlayer/musicPlayer.js"></script>
 <script type="text/javascript">
 	/* $(function (){
 		$('#2Dcode').qrcode("http://192.168.1.112:8082/demo/");
@@ -16,8 +22,7 @@
 </script>
 </head>
 <body>
-	<div id="div1">
-		<img src="${ctx}/media/musicPlayer/images/background_2.jpg" />
+	<div class="main_div">
 	</div>
 	<fieldset>
 		<div class="bo">
@@ -29,10 +34,6 @@
 			<div class="ctrlbox">
 				<div class="ctrPlay" id="player">
 					<div class="ctrl">
-						<div class="tag left">
-							<strong>Title</strong> <span class="artist">Artist</span> <span
-								class="album">Album</span>
-						</div>
 						<div class="control">
 							<div class="repeatShuffleBox left">
 								<div class="musiclist icon" title="音乐列表"></div>
@@ -50,12 +51,17 @@
 								</div>
 							</div>
 						</div>
-						<div class="progress_1">
+						<div class="progress_1" >
 							<div class="slider">
 								<div class="loaded"></div>
 								<div class="pace"></div>
 							</div>
-							<div class="timer left">0:00</div>
+						</div>
+						<div class="tag">
+							<div class="left">
+								<strong class="title">Title</strong> 
+							</div>
+							<div class="timer right">0:00</div>
 						</div>
 					</div>
 				</div>
