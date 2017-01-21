@@ -12,8 +12,7 @@
 <script src="js/musicPlayer/musicPlayer.js"></script>
 </head>
 <body>
-	<div id="div1">
-		<img src="media/musicPlayer/images/灰色石头墙壁.jpg" />
+	<div class="main_div">
 	</div>
 	<fieldset>
 		<div class="bo">
@@ -25,14 +24,10 @@
 			<div class="ctrlbox">
 				<div class="ctrPlay" id="player">
 					<div class="ctrl">
-						<div class="tag left">
-							<strong>Title</strong> <span class="artist">Artist</span> <span
-								class="album">Album</span>
-						</div>
 						<div class="control">
 							<div class="repeatShuffleBox left">
 								<div class="musiclist icon" title="音乐列表"></div>
-								<div class="repeat icon" style="color:#fff" title="播放模式"></div>
+								<div class="repeat icon" title="播放模式"></div>
 							</div>
 							<div class="left RewindBackFrowardBox">
 								<div class="rewind icon" title="上一首"></div>
@@ -46,12 +41,17 @@
 								</div>
 							</div>
 						</div>
-						<div class="progress_1">
+						<div class="progress_1" >
 							<div class="slider">
 								<div class="loaded"></div>
 								<div class="pace"></div>
 							</div>
-							<div class="timer left">0:00</div>
+						</div>
+						<div class="tag">
+							<div class="left">
+								<strong class="title">Title</strong> 
+							</div>
+							<div class="timer right">0:00</div>
 						</div>
 					</div>
 				</div>

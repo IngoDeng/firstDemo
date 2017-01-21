@@ -8,24 +8,32 @@
 			title: '钢琴曲 - 海阔天空',
 			artist: '',
 			album: '海阔天空.mp3',
-			cover:'media/musicPlayer/images/singer/beyond.jpg',
-			mp3: 'media/musicPlayer/music/钢琴曲 - 海阔天空.mp3',
+			cover:ctx_+'/media/musicPlayer/images/singer/beyond.jpg',
+			mp3: ctx_+'/media/musicPlayer/music/钢琴曲 - 海阔天空.mp3',
 			ogg: ''
 			},
 		{
 			title: 'Hita - 昔言',
 			artist: '',
 			album: 'Hita - 昔言.mp3',
-			cover:'media/musicPlayer/images/singer/Hita.jpg',
-			mp3: 'media/musicPlayer/music/Hita - 昔言.mp3',
+			cover:ctx_+'/media/musicPlayer/images/singer/Hita.jpg',
+			mp3: ctx_+'/media/musicPlayer/music/Hita - 昔言.mp3',
+			ogg: ''
+			},
+		{
+			title: 'Carpenters - Yesterday Once More',
+			artist: '',
+			album: 'Carpenters - Yesterday Once More.mp3',
+			cover:ctx_+'/media/musicPlayer/images/singer/Carpenters.jpg',
+			mp3: ctx_+'/media/musicPlayer/music/Carpenters - Yesterday Once More.mp3',
 			ogg: ''
 			},
 		{
 			title: 'Alan Walker - Faded',
 			artist: '',
 			album: 'Alan Walker - Faded.mp3',
-			cover:'media/musicPlayer/images/singer/faded.jpg',
-			mp3: 'media/musicPlayer/music/Alan Walker - Faded.mp3',
+			cover:ctx_+'/media/musicPlayer/images/singer/faded.jpg',
+			mp3: ctx_+'/media/musicPlayer/music/Alan Walker - Faded.mp3',
 			ogg: ''
 			}
 		];
@@ -171,7 +179,7 @@
 			newaudio = $('<audio>').html('<source  src="'+item.mp3+'"><source src="'+item.ogg+'">').appendTo('#player');
 		
 		//$('.cover').html('<img src="'+item.cover+'" alt="'+item.album+'">');
-		$('.tag').html('<strong>'+item.title+'</strong><span class="artist">'+item.artist+'</span><span class="album"></span>');
+		$('.tag strong').html(item.title);
 		$('#playlist li').removeClass('playing').eq(i).addClass('playing');
 		//$('#playlist').css("background", "url("+item.cover+") rgba(0, 0, 0, 0.3)");
 		audio = newaudio[0];
